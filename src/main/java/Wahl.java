@@ -17,6 +17,8 @@ class Kandidat {
         this.punkte += p;
         if (p == 2)
             this.platz1++;
+        if (p == -2)
+            this.platz1--;
     }
 
     public String toString() {
@@ -57,7 +59,7 @@ public class Wahl {
     static Kandidat oldKandidat2 = null;
 
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         islog(args);
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         int i = 1;
@@ -74,7 +76,7 @@ public class Wahl {
         }
     }
 
-    private static void showlist(BufferedReader in, PrintWriter out, int i, DecimalFormat dc) throws IOException {
+    static void showlist(BufferedReader in, PrintWriter out, int i, DecimalFormat dc) throws IOException {
         String ein;
         while ((ein = in.readLine()) != null && !ein.equals("quit")) {
             if(testifeingabeistreturn(out, i, dc, ein)) {
@@ -93,7 +95,7 @@ public class Wahl {
         }
     }
 
-    private static Boolean testifeingabeistreturn(PrintWriter out, int i, DecimalFormat dc, String ein) {
+    static Boolean testifeingabeistreturn(PrintWriter out, int i, DecimalFormat dc, String ein) {
         if (ein.equals("return")) {
             if (oldKandidat1 != null) {
                 oldKandidat1.addPoints(-2);
@@ -109,7 +111,7 @@ public class Wahl {
         return false;
     }
 
-    private static int testifeingabeKorrekt(PrintWriter out, int i, DecimalFormat dc, int ok) {
+    static int testifeingabeKorrekt(PrintWriter out, int i, DecimalFormat dc, int ok) {
         if (ok != 2) {
             System.out.println("     Falsche Eingabe!");
             out.println("     Falsche Eingabe!");
@@ -127,7 +129,7 @@ public class Wahl {
         return i;
     }
 
-    private static int addifcharK(String ein) {
+    static int addifcharK(String ein) {
         int ok = 0;
         for (Kandidat kandidat : k) {
             if (ein.charAt(0) == kandidat.firstChar()) {
@@ -144,7 +146,7 @@ public class Wahl {
         return ok;
     }
 
-    private static int addifchardash(String ein) {
+    static int addifchardash(String ein) {
         int ulOk = 0;
         if (ein.charAt(0) == '-') {
             ulOk++;
@@ -155,12 +157,12 @@ public class Wahl {
         return ulOk;
     }
 
-    private static void printformat(DecimalFormat dc, PrintWriter out, int i) {
+    static void printformat(DecimalFormat dc, PrintWriter out, int i) {
         System.out.print(dc.format(i) + " >");
         out.print(dc.format(i) + " >");
     }
 
-    public static void islog(String[] args) {
+    static void islog(String[] args) {
         	if (args.length != 1) {
                 System.out.println("Keine Logdatei");
                 System.out.println("Usage: java Wahl pathToLog");
@@ -177,18 +179,18 @@ public class Wahl {
         return checkcharcount(ch1, ch2, test1, test2);
     }
 
-    private static boolean checkcharcount(char ch1, char ch2, int test1, int test2) {
+    static boolean checkcharcount(char ch1, char ch2, int test1, int test2) {
         test1 = berechnecharcount(ch1, test1);
         test2 = berechnecharcount(ch2, test2);
         return test1 == 1 && test2 == 1;
     }
 
-    private static int ifchardash(char ch, int test) {
+    static int ifchardash(char ch, int test) {
         if (ch == '-') test++;
         return test;
     }
 
-    private static int berechnecharcount(char ch, int test) {
+    static int berechnecharcount(char ch, int test) {
         for (Kandidat kandidat : k) {
             if (ch == kandidat.firstChar()) test++;
         }
