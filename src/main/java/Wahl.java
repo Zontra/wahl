@@ -3,15 +3,18 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 class Kandidat {
 
     private final String name;
     private int punkte;
     private int platz1;
+    private int id;
 
-    public Kandidat(String name) {
+    public Kandidat(String name, int id) {
         this.name = name;
+        this.id = id;
     }
 
 
@@ -21,6 +24,14 @@ class Kandidat {
             this.platz1++;
         if (p == -2)
             this.platz1--;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String toString() {
@@ -48,13 +59,16 @@ class Kandidat {
 
 public class Wahl {
     static List<Kandidat> k = new ArrayList<>();
+    static List<String> names = new ArrayList<>();
 
     static {
-        k.add(new Kandidat("Dominik Hofmann"));
-        k.add(new Kandidat("Kilian Prager"));
-        k.add(new Kandidat("Niklas Hochstöger"));
-        k.add(new Kandidat("Paul Pfiel"));
-        k.add(new Kandidat("Raid Alarkhanov"));
+        names.add("Dominik Hofmann");
+        names.add("Kilian Prager");
+        names.add("Niklas Hochstöger");
+        names.add("Paul Pfiel");
+        names.add("Raid Alarkhanov");
+
+        IntStream.range(0, names.size()).forEach(i -> k.add(new Kandidat(names.get(i), i + 1)));
     }
     static Kandidat oldKandidat1 = null;
     static Kandidat oldKandidat2 = null;
@@ -132,14 +146,15 @@ public class Wahl {
         } else {
             i++;
             for (Kandidat kandidat : k) {
-                System.out.println("    " + kandidat);
-                out.println("     " + kandidat);
+                System.out.println(kandidat.getId() + ".    " + kandidat);
+                out.println(kandidat.getId() + ".     " + kandidat);
             }
         }
         System.out.println("-----------------------------------------------------------");
         out.println("-----------------------------------------------------------");
         out.flush();
         printformat(dc, out, i);
+        out.close();
         return i;
     }
 
@@ -174,6 +189,7 @@ public class Wahl {
     static void printformat(DecimalFormat dc, PrintWriter out, int i) {
         System.out.print(dc.format(i) + " >");
         out.print(dc.format(i) + " >");
+        out.close();
     }
 
     static void islog(String[] args) {

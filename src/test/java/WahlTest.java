@@ -62,18 +62,18 @@ public class WahlTest {
 
     @Test
     void testequals() {
-        Kandidat wahl = new Kandidat("Dominik Hofmann");
-        Kandidat wahl2 = new Kandidat("Kilian Prager");
-        Kandidat wahl3 = new Kandidat("Dominik Hofmann");
+        Kandidat wahl = new Kandidat("Dominik Hofmann", 1);
+        Kandidat wahl2 = new Kandidat("Kilian Prager", 2);
+        Kandidat wahl3 = new Kandidat("Dominik Hofmann", 3);
         assertThat(wahl.equals(wahl3)).isTrue();
         assertThat(wahl.equals(wahl2)).isFalse();
     }
 
     @Test
     void testhashCode() {
-        Kandidat wahl = new Kandidat("Dominik Hofmann");
-        Kandidat wahl2 = new Kandidat("Kilian Prager");
-        Kandidat wahl3 = new Kandidat("Dominik Hofmann");
+        Kandidat wahl = new Kandidat("Dominik Hofmann", 1);
+        Kandidat wahl2 = new Kandidat("Kilian Prager", 2);
+        Kandidat wahl3 = new Kandidat("Dominik Hofmann", 3);
         assertThat(wahl.hashCode()).isEqualTo(wahl3.hashCode());
         assertThat(wahl.hashCode()).isNotEqualTo(wahl2.hashCode());
     }
