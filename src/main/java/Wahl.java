@@ -1,5 +1,7 @@
 import java.io.*;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 class Kandidat {
@@ -45,21 +47,21 @@ class Kandidat {
 }
 
 public class Wahl {
-    static Kandidat[] k = new Kandidat[5];
+    static List<Kandidat> k = new ArrayList<>();
 
     static {
-        k[0] = new Kandidat("Dominik Hofmann");
-        k[1] = new Kandidat("Kilian Prager");
-        k[2] = new Kandidat("Niklas Hochstöger");
-        k[3] = new Kandidat("Paul Pfiel");
-        k[4] = new Kandidat("Raid Alarkhanov");
+        k.add(new Kandidat("Dominik Hofmann"));
+        k.add(new Kandidat("Kilian Prager"));
+        k.add(new Kandidat("Niklas Hochstöger"));
+        k.add(new Kandidat("Paul Pfiel"));
+        k.add(new Kandidat("Raid Alarkhanov"));
     }
-
     static Kandidat oldKandidat1 = null;
     static Kandidat oldKandidat2 = null;
 
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
+        checkKandidateNumber();
         islog(args);
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         int i = 1;
@@ -75,6 +77,18 @@ public class Wahl {
             System.err.println("Error: " + ioe.getMessage());
         }
     }
+
+    private static void checkKandidateNumber() {
+        if (k.size() < 2) {
+            System.out.println("Es muessen mindestens 2 Kandidaten vorhanden sein!");
+            System.exit(1);
+        } else if (k.size() > 9) {
+            System.out.println("Es duerfen maximal 9 Kandidaten vorhanden sein!");
+            System.exit(1);
+        }
+    }
+
+
 
     static void showlist(BufferedReader in, PrintWriter out, int i, DecimalFormat dc) throws IOException {
         String ein;

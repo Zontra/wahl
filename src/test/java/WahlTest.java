@@ -1,5 +1,6 @@
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -20,8 +21,8 @@ public class WahlTest {
     @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
-
     }
+
 
     @After
     public void restoreStreams() {
@@ -43,7 +44,7 @@ public class WahlTest {
     @Test
     void testaddifcharK() {
         assertThat(Wahl.addifcharK("mm")).isEqualTo(0);
-        assertThat(Wahl.addifcharK("da")).isEqualTo(1);
+        assertThat(Wahl.addifcharK("dm")).isEqualTo(1);
         assertThat(Wahl.addifcharK("dn")).isEqualTo(2);
     }
 
